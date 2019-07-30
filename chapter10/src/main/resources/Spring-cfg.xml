@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="role" class="com.ssm.pojo.Role">
+        <!--constructor-arg用于定义类构造方法的参数-->
+        <!--index用于定义参数的位置-->
+        <!--value则是设置值-->
+        <constructor-arg index="0" value="总经理"/>
+        <constructor-arg index="1" value="公司管理者"/>
+    </bean>
+</beans>
+
