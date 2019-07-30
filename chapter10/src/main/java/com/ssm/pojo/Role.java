@@ -12,7 +12,13 @@ public class Role {
     private Long id;
     private String roleName;
     private String note;
-    public Role(String roleName,String note){
+    // setter注入需要有无参的构造函数
+    public Role(){
+
+    }
+    // 构造函数注入
+    public Role(Long id,String roleName,String note){
+        this.id = id;
         this.roleName = roleName;
         this.note = note;
     }

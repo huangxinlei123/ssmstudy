@@ -3,12 +3,112 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="role" class="com.ssm.pojo.Role">
-        <!--constructor-arg用于定义类构造方法的参数-->
-        <!--index用于定义参数的位置-->
-        <!--value则是设置值-->
+    <!--<bean id="role" class="com.ssm.pojo.Role">
+        &lt;!&ndash;constructor-arg用于定义类构造方法的参数&ndash;&gt;
+        &lt;!&ndash;index用于定义参数的位置&ndash;&gt;
+        &lt;!&ndash;value则是设置值&ndash;&gt;
         <constructor-arg index="0" value="总经理"/>
         <constructor-arg index="1" value="公司管理者"/>
+    </bean>-->
+    <!--Spring通过反射调用没有参数的构造方法生成对象，同时通过反射对应的setter注入配置的值-->
+    <bean id="role3" class="com.ssm.pojo.Role">
+        <property name="roleName" value="高级工程师"/>
+        <property name="note" value="重要人员"/>
     </bean>
+    <!--简单类型配置-->
+    <bean id="complexAssembly" class="com.ssm.pojo.ComplexAssembly">
+        <property name="id" value="1"/>
+        <!--list 集合的装配-->
+        <property name="list">
+            <!--List 属性为对应的＜list>元素进行装配，然后通过多个＜value＞元素设值-->
+            <list>
+                <value>value-list-1</value>
+                <value>value-list-2</value>
+                <value>value-list-3</value>
+            </list>
+        </property>
+        <!--map集合的配置-->
+        <property name="map">
+            <!--Map 属性为对应的＜map＞元素进行装配，然后通过多个＜entry＞
+            元素设值，只是 entry包含一个键（key）和一个值（value）的设置。-->
+            <map>
+                <!--当为复杂类型时，比如（类）-->
+                <entry key="key1" value="value1"/>
+                <entry key="key2" value="value2"/>
+            </map>
+        </property>
+        <property name="props">
+            <!--Properties 属性，为对应的＜properties＞元素进行装配，通过多个
+            ＜property＞元素设置， 只是 property元素有一个必填属性 key，然后
+            可以设置值。 -->
+            <props>
+                <prop key="prop1">value-prop-1</prop>
+                <prop key="prop2">value-prop-2</prop>
+                <prop key="prop3">value-prop-3</prop>
+            </props>
+        </property>
+        <!--set-->
+        <property name="set">
+            <!--Set 属性为对应的＜set>元素进行装配，然后通过多个＜value＞元素设值。 -->
+            <set>
+                <value>value-set-1</value>
+                <value>value-set-2</value>
+                <value>value-set-3</value>
+            </set>
+        </property>
+        <property name="array">
+            <!--对于数组而言，可以使用＜array＞设置值，然后通过多个＜value＞元素设值。-->
+            <array>
+                <value>value-array-1</value>
+                <value>value-array-2</value>
+                <value>value-array-3</value>
+            </array>
+        </property>
+    </bean>
+    <!--复杂类型配置-->
+    <bean id="role1" class="com.ssm.pojo.Role">
+        <property name="id" value="1"/>
+        <property name="roleName" value="role_name_1"/>
+        <property name="note" value="role_note_1"/>
+    </bean>
+    <bean id="role2" class="com.ssm.pojo.Role">
+        <property name="id" value="2"/>
+        <property name="roleName" value="role_name_2"/>
+        <property name="note" value="role_note_2"/>
+    </bean>
+    <bean id="user1" class="com.ssm.pojo.User">
+        <property name="id" value="1"/>
+        <property name="userName" value="user_name_1"/>
+        <property name="note" value="role_note_1"/>
+    </bean>
+    <bean id="user2" class="com.ssm.pojo.User">
+        <property name="id" value="2"/>
+        <property name="userName" value="user_name_2"/>
+        <property name="note" value="role_note_2"/>
+    </bean>
+    <bean id="userRoleAssembly" class="com.ssm.pojo.UserRoleAssembly">
+        <property name="id" value="1"/>
+        <property name="list">
+            <list>
+                <ref bean="role1"/>
+                <ref bean="role2"/>
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key-ref="role1" value-ref="user1"/>
+                <entry key-ref="role2" value-ref="user2"/>
+            </map>
+        </property>
+        <property name="set">
+            <set>
+                <ref bean="role1"/>
+                <ref bean="role2"/>
+            </set>
+        </property>
+
+    </bean>
+
+
 </beans>
 
